@@ -1,0 +1,3 @@
+/home/sans/lcx/hw/game/SDK/SDK_C++/build/CMakeFiles/edit_cache.dir
+/home/sans/lcx/hw/game/SDK/SDK_C++/build/CMakeFiles/rebuild_cache.dir
+/home/sans/lcx/hw/game/SDK/SDK_C++/build/CMakeFiles/CodeCraft-2019.dir
