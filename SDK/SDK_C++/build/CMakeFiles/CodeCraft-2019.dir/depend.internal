@@ -16,7 +16,14 @@ CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o
  /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/./lib/queue/queue.h
  /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/./lib/stack/stack.h
  /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/./lib/vector/Vector.h
- /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/./lib/vector/vector_bracket.h
- /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/./lib/vector/vector_copyfrom.h
- /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/./lib/vector/vector_implemention.h
  /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/CodeCraft-2019.cpp
+ /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/basicStruct.h
+ /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/fileread.h
+ /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/graphMatrix/graph.h
+ /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/utility/print.h
+ /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/utility/swap.h
+ /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/vector/Vector.h
+ /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/vector/sort.h
+ /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/vector/vector_bracket.h
+ /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/vector/vector_copyfrom.h
+ /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/vector/vector_implemention.h

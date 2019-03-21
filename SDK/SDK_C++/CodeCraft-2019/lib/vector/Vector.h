@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#define _MyDSAVECTOR_H_
 //#include <time.h>
 
 /*
@@ -15,6 +16,7 @@ namespace MyDSA
             Rank _size; int _capacity; T* _elem;
             void copyFrom(T const * A, Rank lo, Rank hi); // copy [lo,hi)
             void expand();
+            Rank max ( Rank lo, Rank hi ); //选取最大元素
 
         public:
         //构造函数
@@ -40,7 +42,8 @@ namespace MyDSA
         int erase(Rank lo, Rank hi);
         T erase(Rank r);
         T pop_back() { return erase(_size-1); };
-
+        void sort ( Rank lo, Rank hi ); //对[lo, hi)排序
+        void sort() { sort ( 0, _size ); } //整体排序
     };
 }
 #include "vector_implemention.h"

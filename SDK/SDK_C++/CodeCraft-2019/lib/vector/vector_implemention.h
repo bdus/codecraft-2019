@@ -1,9 +1,9 @@
 #pragma once
+#include "../utility/swap.h"
 
 #include "vector_bracket.h"
 
 #include "vector_copyfrom.h"
-
 
 template <typename T>
 MyDSA::Vector<T> & MyDSA::Vector<T>::operator= (MyDSA::Vector<T> const& V)
@@ -77,3 +77,5 @@ namespace MyDSA
         return _backup;
     }    
 }
+
+#include "sort.h"

@@ -4,6 +4,8 @@
 #include <string>
 #include <stdio.h>
 #include "graphMatrix/graph.h"
+#include "basicStruct.h"
+#include "vector/Vector.h"
 
 /**
  *  input:
@@ -11,7 +13,35 @@
  *      int headlines (# lines to ignore at begining)
  * 
 */ 
-void textread(std::string & filename, int headerlines)
+// void textread(std::string & filename, int headerlines)
+// {
+//     std::ifstream myfile(filename);
+//     std::string line;
+//     if(myfile.is_open())
+//     {
+//         while(headerlines--)
+//         {
+//             getline(myfile,line);
+//         }
+        
+//         while(getline(myfile,line))
+//         {            
+//             std::cout << line << std::endl;
+// 	        int id, from, to, speed,p;
+// 	        sscanf(line.c_str(),"(%d,%d,%d,%d,%d)",&id,&from, &to, &speed,&p);
+// 	        std::cout << id <<  from <<  to <<  speed << p << std::endl;
+	    
+//         }
+//         myfile.close();        
+//     }
+//     else
+//     {
+//         std::cout << "Failed to open file." << std::endl;        
+//     }   
+// }
+
+template <typename T>
+void textread(MyDSA::Vector<T> & anslist, std::string & filename, int headerlines)
 {
     std::ifstream myfile(filename);
     std::string line;
@@ -23,44 +53,46 @@ void textread(std::string & filename, int headerlines)
         }
         
         while(getline(myfile,line))
-        {            
+        {   
+            #ifdef _DEBUG
             std::cout << line << std::endl;
-	    int id, from, to, speed,p;
-	    sscanf(str.c_str(),"(%d,%d,%d,%d,%d)",&id,&from, &to, &speed,&p);
-	    cout << id <<  from <<  to <<  speed << p << endl;
-	    
+	        T e(line);
+            std::cout << e << std::endl;
+            #endif
+            anslist.push_back(line);        
         }
         myfile.close();        
     }
     else
     {
         std::cout << "Failed to open file." << std::endl;        
-    }   
+    }       
 }
-template <typename Tv, typename Te>
-void textread(MyDSA::Graph<Tv,Te> & g, std::string & filename, int headerlines)
-{
-    std::ifstream myfile(filename);
-    std::string line;
-    if(myfile.is_open())
-    {
-        while(headerlines--)
-        {
-            getline(myfile,line);
-        }
+
+// template <typename Tv, typename Te>
+// void textread(MyDSA::Graph<Tv,Te> & g, std::string & filename, int headerlines)
+// {
+//     std::ifstream myfile(filename);
+//     std::string line;
+//     if(myfile.is_open())
+//     {
+//         while(headerlines--)
+//         {
+//             getline(myfile,line);
+//         }
         
-        while(getline(myfile,line))
-        {            
-            std::cout << line << std::endl;
-	        int id, from, to, speed,p;
-	        sscanf(str.c_str(),"(%d,%d,%d,%d,%d)",&id,&from, &to, &speed,&p);
-	        cout << id <<  from <<  to <<  speed << p << endl;
+//         while(getline(myfile,line))
+//         {            
+//             std::cout << line << std::endl;
+// 	        int id, from, to, speed,p;
+// 	        sscanf(str.c_str(),"(%d,%d,%d,%d,%d)",&id,&from, &to, &speed,&p);
+// 	        cout << id <<  from <<  to <<  speed << p << endl;
 	    
-        }
-        myfile.close();        
-    }
-    else
-    {
-        std::cout << "Failed to open file." << std::endl;        
-    }   
-}
+//         }
+//         myfile.close();        
+//     }
+//     else
+//     {
+//         std::cout << "Failed to open file." << std::endl;        
+//     }   
+// }
