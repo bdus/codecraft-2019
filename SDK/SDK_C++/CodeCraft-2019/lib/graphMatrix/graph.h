@@ -14,12 +14,12 @@ namespace MyDSA
     private:
         void reset()
         {
-            for( int i = 0; i < n; i++)
+            for( int i = 0; i < nv; i++)
             {
                 status(i) = UNDISCOVERED; 
                 dTime(i) = fTime(i) = -1;// 状态，时间标签
                 parent(i) = -1; priority(i) = INT_MAX; //(在遍历树中的)父节点，优先级数
-                for(int j = 0; j < n; j++)//所有边的类型
+                for(int j = 0; j < nv; j++)//所有边的类型
                     if(exists(i,j)) type(i,j) = UNDETERMINED;
             }        
         }
@@ -31,7 +31,7 @@ namespace MyDSA
 
     public:
     // 顶点
-        int n; // #vertex
+        int nv; // #vertex
         virtual int insert ( Tv const& ) = 0; //插入顶点，返回编号
         virtual Tv remove ( int ) = 0; //删除顶点及其关联边，返回该顶点信息
         virtual Tv& vertex ( int ) = 0; //顶点v的数据（该顶点的确存在）
@@ -45,7 +45,7 @@ namespace MyDSA
         virtual int& parent ( int ) = 0; //顶点v在遍历树中的父亲
         virtual int& priority ( int ) = 0; //顶点v在遍历树中的优先级数
     // 边：这里约定，无向边均统一转化为方向互逆的一对有向边，从而将无向图视作有向图的特例
-        int e; //边总数
+        int ne; //边总数
         virtual bool exists ( int, int ) = 0; //边(v, u)是否存在
         virtual void insert ( Te const&, int, int, int ) = 0; //在顶点v和u之间插入权重为w的边e
         virtual Te remove ( int, int ) = 0; //删除顶点v和u之间的边e，返回该边信息

@@ -81,6 +81,10 @@ lib/fileread.h
 /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/fileread.h
 lib/utility/print.h
 /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/utility/print.h
+vector
+-
+tmpG.h
+/home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/tmpG.h
 
 /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/basicStruct.h
 
@@ -109,6 +113,10 @@ graph_implementation.h
 /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/graphMatrix/graph_implementation.h
 
 /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/utility/print.h
+iostream
+-
+vector
+-
 
 /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/utility/swap.h
 
@@ -133,4 +141,6 @@ vector_copyfrom.h
 /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/vector/vector_copyfrom.h
 sort.h
 /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/vector/sort.h
+
+/home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/tmpG.h
 

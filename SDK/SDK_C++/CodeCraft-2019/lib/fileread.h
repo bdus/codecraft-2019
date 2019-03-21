@@ -70,29 +70,8 @@ void textread(MyDSA::Vector<T> & anslist, std::string & filename, int headerline
 }
 
 // template <typename Tv, typename Te>
-// void textread(MyDSA::Graph<Tv,Te> & g, std::string & filename, int headerlines)
+// void SetGraph(MyDSA::Graph<Tv,Te> & g,  MyDSA::Vector<Cross> const & vList, MyDSA::Vector<Road> const & eList)
 // {
-//     std::ifstream myfile(filename);
-//     std::string line;
-//     if(myfile.is_open())
-//     {
-//         while(headerlines--)
-//         {
-//             getline(myfile,line);
-//         }
-        
-//         while(getline(myfile,line))
-//         {            
-//             std::cout << line << std::endl;
-// 	        int id, from, to, speed,p;
-// 	        sscanf(str.c_str(),"(%d,%d,%d,%d,%d)",&id,&from, &to, &speed,&p);
-// 	        cout << id <<  from <<  to <<  speed << p << endl;
-	    
-//         }
-//         myfile.close();        
-//     }
-//     else
-//     {
-//         std::cout << "Failed to open file." << std::endl;        
-//     }   
+//     g.insert()
+    
 // }

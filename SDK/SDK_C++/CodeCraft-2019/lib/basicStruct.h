@@ -1,6 +1,14 @@
+#pragma once
+
 #ifndef abs
-#define abs(x) ((x>=0)?x:-x)
+#define abs(x) ((x)?x:-x)
 #endif
+
+// struct basicStruct
+// {
+    
+// };
+
 
 struct Car
 {//#(id,from,to,speed,planTime)
@@ -22,15 +30,14 @@ struct Car
 
     friend std::ostream & operator<< (std::ostream& o, Car const & c)
     {
-        o << "c : " << c.id << ", " << c.from << ", " << c.to << ", " <<c.speed << ", " <<c.planTime << std::endl; 
+        o << "c : " << c.id << ", " << c.from << ", " << c.to << ", " <<c.speed << ", " <<c.planTime << ", " << c.distance << std::endl; 
         return o;
     }
-
 
     Car & operator= (std::string const& line)
     {
         sscanf(line.c_str(),"(%d,%d,%d,%d,%d)",&this->id,&this->from, &this->to, &this->speed,&this->planTime);
-        this->distance = abs(this->from - this->to);
+        this->distance = abs(this->to - this->from);
     }
     Car & operator= (int const& val)
     {
@@ -48,7 +55,7 @@ struct Car
         this->to = c.to;
         this->speed = c.speed;
         this->planTime = c.planTime;
-        this->distance = abs(c.from - c.to);
+        this->distance = abs(c.to - c.from);
     }
 /*  为了排序重载 */
     bool operator== (Car const & c)
@@ -57,7 +64,7 @@ struct Car
     }    
     friend bool operator < (Car const & a, Car const & b)
     {
-        return  (a.planTime < b.planTime) || (a.distance < b.distance) || (a.speed < b.speed) ;
+        return  (a.planTime < b.planTime)? true : (a.distance < b.distance) ? true: (a.speed < b.speed) ;
     }
     friend bool operator > (Car const & a, Car const & b)
     {
@@ -76,8 +83,44 @@ struct Cross
     int roadId1;
     int roadId2;
     int roadId3;
-    int roadId4;
-    Cross(int id, int r1, int r2, int r3, int r4) : id(id), roadId1(r1), roadId2(r2), roadId3(r3), roadId4(r4) {}
+    int roadId4; 
+    int count;
+
+/*  为了初始化 和 赋值 重载*/
+    Cross () {*this = -1;}
+    Cross (int val) {*this = val;}
+    Cross (std::string line) {*this = line;}    
+    Cross (int id, int r1, int r2, int r3, int r4) : id(id), roadId1(r1), roadId2(r2), roadId3(r3), roadId4(r4) {count=0;}
+    friend std::ostream & operator<< (std::ostream& o, Cross const & c)
+    {
+        o << "c : " << c.id << ", " << c.roadId1 << ", " << c.roadId2 << ", " <<c.roadId3 << ", " <<c.roadId4 << std::endl; 
+        return o;
+    }
+
+    Cross & operator= (std::string const& line)
+    {//#(id,roadId,roadId,roadId,roadId)
+        sscanf(line.c_str(),"(%d,%d,%d,%d,%d)",&this->id,&this->roadId1, &this->roadId2, &this->roadId3,&this->roadId4);
+        this->count = 0;        
+    }
+    Cross & operator= (int const& val)
+    {
+        this->id = 0;
+        this->roadId1 = -1;
+        this->roadId2 = -1;
+        this->roadId3 = -1;
+        this->roadId4 = -1;
+        this->count = 0;
+    }
+    Cross & operator= (Cross const & c)
+    {
+        this->id = c.id;
+        this->count = c.count;
+        this->roadId1 = c.roadId1;
+        this->roadId2 = c.roadId2;
+        this->roadId3 = c.roadId3;
+        this->roadId4 = c.roadId4;
+    }
+
 };
 
 struct Road
@@ -89,5 +132,47 @@ struct Road
     int from;
     int to;
     bool isDuplex;
+    int count;
+
+/*  为了初始化 和 赋值 重载*/
+    Road () {*this = -1;}
+    Road (int val) {*this = val;}
+    Road (std::string line) {*this = line;} 
     Road(int id, int le, int sp, int ch, int fr, int to, bool isD) : id(id), length(le), speed(sp), channel(ch), from(fr), to(to), isDuplex(isD) {}
+    friend std::ostream & operator<< (std::ostream& o, Road const & c)
+    {
+        o << "c : " << c.id << ", " << c.length << ", " << c.speed << ", " <<c.channel << ", " <<c.from  << ", " <<c.to <<", " <<c.isDuplex <<  ", " <<c.count << std::endl; 
+        return o;
+    }
+
+    Road & operator= (std::string const& line)
+    {//#(id,length,speed,channel,from,to,isDuplex)
+        int status;
+        sscanf(line.c_str(),"(%d,%d,%d,%d,%d,%d,%d)",&this->id,&this->length, &this->speed, &this->channel,&this->from,&this->to,&status);
+        this->isDuplex = (status==0)?false:true;
+        this->count = 0;        
+    }
+    Road & operator= (int const& val)
+    {
+        this->id = 0;
+        this->length = 0;
+        this->speed = 0;
+        this->channel = 0;
+        this->from = 0;
+        this->to = 0;
+        this->isDuplex = 0;
+        this->count = 0;        
+    }
+    Road & operator= (Road const & c)
+    {
+        this->id = c.id;
+        this->length = c.length;
+        this->speed = c.speed;
+        this->channel = c.channel;
+        this->from = c.from;
+        this->to = c.to;
+        this->isDuplex = c.isDuplex;
+        this->count = c.count; 
+    }
+
 };

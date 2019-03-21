@@ -3,7 +3,9 @@
 #include "lib/vector/Vector.h"
 #include "lib/fileread.h"
 #include "lib/utility/print.h"
-//#include <vector>
+#include <vector>
+#include "tmpG.h"
+
 //#define _RUN
 #define _DEBUG
 
@@ -32,58 +34,76 @@ int main(int argc, char *argv[])
 	
     // read input file
     /* test car */
-    Car as(0,0,0,0,0);
-    Car bs = {0,0,0,0,1};
-    std::cout << (bs == as) << std::endl;
-    std::cout << (bs < as) << std::endl;
-    std::cout << (bs > as) << std::endl;
-    as = "(10000, 15, 35, 6, 1)";
-    std::cout << as << std::endl;
+    // Car as(0,0,0,0,0);
+    // Car bs = {0,0,0,0,1};
+    // std::cout << (bs == as) << std::endl;
+    // std::cout << (bs < as) << std::endl;
+    // std::cout << (bs > as) << std::endl;
+    // as = "(10000, 15, 35, 6, 1)";
+    // std::cout << as << std::endl;
     
     MyDSA::Vector<Car> carList;
     textread<Car>(carList,carPath,1);
-    print(carList);
-    carList.sort();
-    print(carList);
-        
-    std::cout << carList.pop_back() << std::endl;
+    //print(carList);
+    // carList.sort();
+    // print(carList);
+
+    // std::cout << carList.pop_back() << std::endl;
+    /* test car end */
+    
+    /* Cross test */
+
+    // Cross as(0,0,0,0,0);
+    // Cross bs = {0,0,0,0,1};
+    // as = "(10000, 15, 35, 6, 1)";
+    // std::cout << as << std::endl;
+    // std::cout << bs << std::endl;
+    MyDSA::Vector<Cross> vList;
+    textread<Cross>(vList,crossPath,1);
+    //print(vList); 
+
+    /* Cross test end */
+
+    /* Road test */
+
+    // Road as(0,0,0,0,0,0,0);
+    // Road bs = {0,0,0,0,1,0,0};
+    // as = "(5000, 10, 5, 1, 1, 2, 1)";
+    // std::cout << as << std::endl;
+    // std::cout << bs << std::endl;
+    MyDSA::Vector<Road> eList;
+    textread<Road>(eList,roadPath,1);
+    //print(eList);
+
+    /* Road test end */
+
+    int num_v = vList.size();
+
+    std::vector<std::vector<int>> G = onesG(num_v,num_v,INF);
+
+
+    setG(G,eList); 
+
+    print(G);
+
+
+    std::vector<bool> vis(num_v);
+    std::vector<int> d(num_v);
+    std::vector<int> pre(num_v);
+
+    Dijkstra(num_v,0,G,vis,d,pre);
+    for (auto x : d)
+        std::cout << x << " ";
+    std::cout << std::endl;
+
+	
+    print(pre);
     
 
-        
-        
-    //std::vector<Car> carList;
-    //MyDSA::GraphMatrix<Cross,Road> dg;
+    //输出从起点s到顶点v的最短路径
     
+    //DFSPrint(0, 5, pre);
 
-   	// MyDSA::GraphMatrix<char, int> dg;
-    // char vertex = 'a';
-    // dg.insert(vertex);
-    // dg.insert('b');
-    // dg.insert('c');
-    // int edg = 10;
-            
-    // dg.insert(edg,10,0,1);
-    // dg.insert(edg,10,0,2);
-    // for (int i = 0; i < 3; i++)
-    // {
-    //     for(int j = 0; j < 3; j++)
-    //         if(dg.exists(i,j)) 
-    //             std::cout << dg.edge(i,j) << ' ';
-    //         else
-    //             std::cout << "  ";
-    //     std::cout << std::endl;
-    // }
-
-
-    // std::cout << "bfs" << std::endl;
-    // dg.bfs(0);
-
-    // std::cout << "bfs2" << std::endl;
-    // dg.bfs(0);
-
-    // std::cout << "dijk" << std::endl;
-    // dg.dijkstra(0);
-	
-	
+    
 	return 0;
 }

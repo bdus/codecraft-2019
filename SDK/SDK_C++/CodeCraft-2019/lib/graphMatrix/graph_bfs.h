@@ -8,7 +8,7 @@ namespace MyDSA
     do //逐一检查所有顶点
         if ( UNDISCOVERED == status ( v ) ) //一旦遇到尚未发现的顶点
             BFS ( v, clock ); //即从该顶点出发启动一次BFS
-    while ( s != ( v = ( ++v % n ) ) ); //按序号检查，故不漏不重
+    while ( s != ( v = ( ++v % nv ) ) ); //按序号检查，故不漏不重
     }
 
     template <typename Tv, typename Te> //广度优先搜索BFS算法（单个连通域）

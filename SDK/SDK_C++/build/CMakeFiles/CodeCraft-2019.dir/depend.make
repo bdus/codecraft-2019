@@ -26,4 +26,5 @@ CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/SDK/SDK_C+
 CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/vector/vector_bracket.h
 CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/vector/vector_copyfrom.h
 CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/lib/vector/vector_implemention.h
+CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/SDK/SDK_C++/CodeCraft-2019/tmpG.h
 
