@@ -35,3 +35,5 @@
 *.tar.gz
 *.log
 *.txt
+*.cmake
+*.bin
