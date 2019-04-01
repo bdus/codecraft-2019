@@ -6,7 +6,12 @@
 #include "lib/io/fileread.h"
 #include "lib/DEBUG.h"
 #include <stdlib.h>
-#include <omp.h>
+
+#include "tardis.h"
+#include "lib/io/AnsTable.h"
+
+using std::cout;
+using std::endl;
 
 int main(int argc, char *argv[])
 {
@@ -33,6 +38,8 @@ int main(int argc, char *argv[])
 	// TODO:process
 	// TODO:write output file
 
+//-----------------------------------------------------
+
 /* read txt */
     MyDSA::Vector<Car> carList;
     textread(carList,carPath,1);
@@ -52,11 +59,30 @@ int main(int argc, char *argv[])
 	//print(pAList);
 
 /* read txt end */
-    #pragma omp parallel for
-    for(int i = 0; i < 100; i++)
-    {
-        std::cout << i << std::endl;
-    }
+
+//-----------------------------------------------------
+
+/* 构建基本数据结构 图、表、答案表 */
+
+    AdjMatNet gd(vList,eList);
+    //gd.print();
+
+	TARDIS table(eList, gd );
+	//table.print();
+
+	//todo 答案表
+	//答案表print实现、读写测试
+
+	//todo OD矩阵
+
+/* 构建 数据结构 end*/
+
+//-----------------------------------------------------
+
+
+
+//-----------------------------------------------------
+
 
 	return 0;
 }

@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o"
-  "/home/sans/lcx/hw/32in4/SDK/SDK/SDK_C++/bin/CodeCraft-2019.pdb"
-  "/home/sans/lcx/hw/32in4/SDK/SDK/SDK_C++/bin/CodeCraft-2019"
+  "/home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/bin/CodeCraft-2019.pdb"
+  "/home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/bin/CodeCraft-2019"
 )
 
 # Per-language clean rules from dependency scanning.

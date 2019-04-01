@@ -1,86 +1,13 @@
 #pragma once
-
+#include <iostream>
+#include <sstream>
+#include <vector>
 // #ifndef abs
 // #define abs(x) ((x)?x:-x)
 // #endif
 
-
-struct Car
-{//#(id,from,to,speed,planTime)
-    //std::string id;
-    int id;
-    int from;
-    int to;
-    int speed;
-    int planTime;
-    int distance; // abs(from - to)
-
-/*  为了初始化 和 赋值 重载*/
-
-    //Car () : id(-1), from(-1), to(-1), speed(-1), planTime(-1) {}
-    Car () {*this = -1;}
-    //Car (int val) : id(val), from(val), to(val), speed(val), planTime(val) {}
-    Car (int val) {*this = val;}
-    Car (std::string line) {*this = line;}
-    Car (int id,int from, int to, int speed, int planTime) : id(id), from(from), to(to), speed(speed), planTime(planTime) {}
-//    Car (std::string id,int from, int to, int speed, int planTime) : id(id), from(from), to(to), speed(speed), planTime(planTime) {}
-   // Car (char * id,int from, int to, int speed, int planTime) : id(id), from(from), to(to), speed(speed), planTime(planTime) {}
-
-    friend std::ostream & operator<< (std::ostream& o, Car const & c)
-    {
-        o << "c : " << c.id << ", " << c.from << ", " << c.to << ", " <<c.speed << ", " <<c.planTime << ", " << c.distance << std::endl;
-        return o;
-    }
-
-    Car & operator= (std::string const& line)
-    {
-//        char st[50];
-//        sscanf(line.c_str(),"(%[^,],%d,%d,%d,%d)",st,&this->from, &this->to, &this->speed,&this->planTime);
-//        this->id = std::string(st);
-        sscanf(line.c_str(),"(%d,%d,%d,%d,%d)",&this->id,&this->from, &this->to, &this->speed,&this->planTime);
-        this->distance = 0;//std::abs(this->to - this->from);
-        return *this;
-    }
-    Car & operator= (int const& val)
-    {
-        this->id = val;
-        this->from = val;
-        this->to = val;
-        this->speed = val;
-        this->planTime = val;
-        this->distance = 0;
-        return *this;
-    }
-    Car & operator= (Car const & c)
-    {
-        this->id = c.id;
-        this->from = c.from;
-        this->to = c.to;
-        this->speed = c.speed;
-        this->planTime = c.planTime;
-        this->distance = abs(c.to - c.from);
-        return *this;
-    }
-/*  为了排序重载 */
-    bool operator== (Car const & c)
-    {
-        return (this->distance == c.distance) && (this->speed == c.speed) && (this->planTime == c.planTime);
-    }
-    friend bool operator < (Car const & a, Car const & b)
-    {
-        //return (a.speed < b.speed);// ? true: (a.distance < b.distance);
-        return  (a.distance/a.speed < b.distance/b.speed)?true : (a.speed < b.speed) ? true: (a.distance < b.distance) ? true : (a.planTime < b.planTime);
-    }
-    friend bool operator > (Car const & a, Car const & b)
-    {
-        return  b < a;
-    }
-};
-// std::ostream & operator<< (std::ostream& o, Car const & c)
-// {
-//     o << "c : " << c.id << ", " << c.from << ", " << c.to << ", " <<c.speed << ", " <<c.planTime << std::endl;
-//     return o;
-// }
+#include "car.h"
+#include "carPath.h"
 
 struct Cross
 {//#(id,roadId,roadId,roadId,roadId)

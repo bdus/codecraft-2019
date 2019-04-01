@@ -6,5 +6,5 @@ CXX_FLAGS =  -O3 -Wall -std=c++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/sans/lcx/hw/32in4/SDK/SDK/SDK_C++/CodeCraft-2019/lib 
+CXX_INCLUDES = -I/home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/lib 
 

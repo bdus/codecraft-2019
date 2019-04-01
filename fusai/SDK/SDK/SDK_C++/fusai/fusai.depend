@@ -1,0 +1,96 @@
+# depslib dependency file v1.0
+1554131087 source:/home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/main.cpp
+	"iostream"
+	"para.h"
+	"lib/io/basicStruct.h"
+	"lib/vector/Vector.h"
+	"lib/graph/AdjMatNet.h"
+	"lib/io/fileread.h"
+	"lib/DEBUG.h"
+	<stdlib.h>
+	"tardis.h"
+	"lib/io/AnsTable.h"
+
+1554104260 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/DEBUG.h
+	"utility/print.h"
+	<cassert>
+	<stdlib.h>
+
+1554126291 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/utility/print.h
+	<iostream>
+	<vector>
+
+1553784252 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/fileread.h
+	<fstream>
+	<string>
+	<stdio.h>
+	"basicStruct.h"
+	"vector/Vector.h"
+
+1553934533 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/basicStruct.h
+
+1553924421 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/vector/Vector.h
+	<iostream>
+	"vector_im.h"
+
+1553146828 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/vector/vector_im.h
+	"../utility/swap.h"
+	"vector_bracket.h"
+	"vector_copyfrom.h"
+	"sort.h"
+
+1553146813 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/utility/swap.h
+
+1552309483 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/vector/vector_bracket.h
+
+1552316152 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/vector/vector_copyfrom.h
+
+1553146433 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/vector/sort.h
+
+1553932900 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/para.h
+	<math.h>
+
+1554126784 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/io/basicStruct.h
+	<iostream>
+	<sstream>
+	<vector>
+	"car.h"
+	"carPath.h"
+
+1554109874 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/io/car.h
+
+1554127588 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/graph/AdjMatNet.h
+	<iostream>
+	<vector>
+	<string>
+	"vertex.h"
+	"edge.h"
+	<map>
+	<stdio.h>
+
+1554107632 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/graph/vertex.h
+
+1554105140 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/graph/edge.h
+
+1554112586 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/io/fileread.h
+	<fstream>
+	<string>
+	<stdio.h>
+
+1554128381 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/io/carPath.h
+
+1554127965 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/tardis.h
+	<iostream>
+	<map>
+	<string>
+	<stdio.h>
+	<vector>
+	"lib/DEBUG.h"
+	"lib/graph/AdjMatNet.h"
+
+1554132039 /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/fusai/lib/io/AnsTable.h
+	<map>
+	<vector>
+	"basicStruct.h"
+	"../DEBUG.h"
+

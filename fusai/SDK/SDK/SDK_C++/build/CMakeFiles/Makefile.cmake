@@ -7,7 +7,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/sans/lcx/hw/32in4/SDK/SDK/SDK_C++/CodeCraft-2019/CMakeLists.txt"
+  "/home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/CMakeLists.txt"
   "CMakeFiles/3.5.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.5.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.5.1/CMakeSystem.cmake"
