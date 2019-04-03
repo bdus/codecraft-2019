@@ -37,3 +37,4 @@
 *.txt
 *.cmake
 *.bin
+*/build

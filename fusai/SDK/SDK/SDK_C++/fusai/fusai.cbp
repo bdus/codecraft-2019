@@ -11,8 +11,10 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="../config/car.txt ../config/road.txt ../config/cross.txt ../config/presetAnswer.txt ../config/answer.txt" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="lib/io" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +24,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="lib/io" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,7 +35,34 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="OD.h" />
+		<Unit filename="lib/DEBUG.h" />
+		<Unit filename="lib/graph/AdjMatNet.h" />
+		<Unit filename="lib/graph/edge.h" />
+		<Unit filename="lib/graph/vertex.h" />
+		<Unit filename="lib/io/AnsTable.h" />
+		<Unit filename="lib/io/basicStruct.h" />
+		<Unit filename="lib/io/car.h" />
+		<Unit filename="lib/io/carPath.h" />
+		<Unit filename="lib/io/fileread.h" />
+		<Unit filename="lib/list/list.h" />
+		<Unit filename="lib/list/listNode.h" />
+		<Unit filename="lib/list/list_implemention.h" />
+		<Unit filename="lib/list/listnode_implemention.h" />
+		<Unit filename="lib/queue/queue.h" />
+		<Unit filename="lib/stack/stack.h" />
+		<Unit filename="lib/stack/stack_implemention.h" />
+		<Unit filename="lib/utility/print.h" />
+		<Unit filename="lib/utility/swap.h" />
+		<Unit filename="lib/vector/Vector.h" />
+		<Unit filename="lib/vector/sort.h" />
+		<Unit filename="lib/vector/vector_bracket.h" />
+		<Unit filename="lib/vector/vector_copyfrom.h" />
+		<Unit filename="lib/vector/vector_im.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="para.h" />
+		<Unit filename="pfs.h" />
+		<Unit filename="tardis.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

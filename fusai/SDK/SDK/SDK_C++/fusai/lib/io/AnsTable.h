@@ -4,6 +4,7 @@
 #include <vector>
 #include "basicStruct.h"
 #include "../DEBUG.h"
+#include <fstream>
 
 class AnsTable
 {
@@ -13,7 +14,7 @@ class AnsTable
     protected:
         int _size;
 
-        /*hum 很膨胀的写了动态的结构 用来保存结果
+        /*humm 用来保存结果
         保存结构:
             int carid, int planTime. int roadid,...
             1000    1   100 101 102
@@ -59,6 +60,10 @@ void AnsTable::makeDict(std::vector<CarPath> const & pAList)
 {
     for(CarPath p : pAList)
     {
+//        std::cout << "id " << p.id << "pt" << p.startTime ;
+//        for(int c : p.path)
+//                std::cout << " " << c ;
+//        std::cout << std::endl;
         push_back(p.id,p.startTime,p.path);
     }
 }
@@ -76,6 +81,7 @@ void AnsTable::push_back(int const & carid, int const &  planTime, std::vector<i
     {
         ans->push_back(n);
     }
+    _AnsTable.push_back(ans);
 }
 
 void AnsTable::read(int const & carid, int & planTime, std::vector<int> & ans)
@@ -86,17 +92,36 @@ void AnsTable::read(int const & carid, int & planTime, std::vector<int> & ans)
         std::cout << "Anstable fail read : -1" << std::endl;
         return;
     }
-    assert( (*_AnsTable[i])[0] == carid);
+    LOG( (*_AnsTable[i])[0] == carid, "AnsTable::read : bad carid %d" , carid);
     planTime = (*_AnsTable[i])[1];
     ans.assign(_AnsTable[i]->begin()+2,_AnsTable[i]->end());
 }
 
 void AnsTable::print()
 {
-
+    for(int i = 0; i < _size; i++)
+    {
+        std::cout << "id: " << (*_AnsTable[i])[0] << " planTime: " << (*_AnsTable[i])[1];
+        for(int j = 2; j < (int)_AnsTable[i]->size(); j++ )
+        {
+            std::cout << " " << (*_AnsTable[i])[j] ;
+        }
+           std::cout << " | "  <<  std::endl;
+    }
 }
-void AnsTable::print(std::string const & answer)
+void AnsTable::print(std::string const & answerPath)
 {
-
+    std::ofstream outfile;
+    outfile.open(answerPath);
+    outfile << "#(carId,StartTime,RoadId...)\n";
+    for(int i = 0; i < _size; i++)
+    {
+        outfile << "(" << (*_AnsTable[i])[0] << "," << (*_AnsTable[i])[1];
+        for(int j = 2; j < (int)_AnsTable[i]->size(); j++ )
+        {
+            outfile<< "," << (*_AnsTable[i])[j] ; //这里输出的应该是道路 而不是节点
+        }
+        outfile << ")\n";
+    }
 }
 #endif // ANSTABLE_H

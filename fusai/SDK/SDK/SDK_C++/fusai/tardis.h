@@ -8,7 +8,7 @@
 #include "lib/graph/AdjMatNet.h"
 
 
-const int TARDIS_default_volum =200000;
+const int TARDIS_default_volum =20000;
 #ifndef CSTR_LEN
 #define CSTR_LEN 80
 #endif
@@ -97,15 +97,16 @@ void TARDIS::write(int const & time, int const & from, int const & to)
 {
     int i = findDict(from,to);
 
-    if(i == -1)
-    {
-        std::cout << "fail write : -1" << from << "," << to << std::endl;
-        return;
-    }
+//    if(i == -1)
+//    {
+//        std::cout << "fail write : -1" << from << "," << to << std::endl;
+//        return;
+//    }
 
-    assert(i != -1);
-    assert(0 <= time && time < (int)TABLE.size() ); ///扩容
-    assert(0 <= i && i < (int)TABLE[0].size() );
+    LOG(i != -1, "faile write : -1, i == %d" , i);
+    LOG(0 <= time , "time illegally, time : ",time );
+    LOG( time < (int)TABLE.size(), "time illegally, time : %d, size %d :",time , (int)TABLE.size() ) ;
+    LOG(0 <= i && i < (int)TABLE[0].size() , "TARDIS::write no road between from - to");
 
     if(time > _last_car)
         _last_car = time;
@@ -123,10 +124,10 @@ int TARDIS::read(int const & time, int const & from, int const & to)
     }
 
     //加判断 time / i 越界、expand
-    assert(i != -1) ;
-    assert(0 <= time );
-    assert(time < (int)TABLE.size() );
-    assert(0 <= i && i < (int)TABLE[0].size() );
+    LOG(i != -1, "faile read : -1, i == %d" , i);
+    LOG(0 <= time , "time illegally, time : ",time );
+    LOG( time < (int)TABLE.size(), "time illegally, time : %d, size %d :",time , (int)TABLE.size() ) ;
+    LOG(0 <= i && i < (int)TABLE[0].size() , "TARDIS::write no road between from - to");
 
     return TABLE[ time ][ i ];
 }
@@ -176,6 +177,6 @@ void TARDIS::makeDict(MyDSA::Vector<Road> const & eList)
             j++;
         }
     }
-    assert(j <= eList.size()*2 );
-    //return adict;
+    //assert(j <= eList.size()*2 , "TARDIS::makeDict  :  bad #road j"  )
+
 }

@@ -75,14 +75,14 @@ struct CarPath
     {
         this->id = 0;
         this->startTime = 0;
-        //this->path.clear();
+        this->path.clear();
         return *this;
     }
     CarPath & operator= (CarPath const & c)
     {
         this->id = c.id;
         this->startTime = c.startTime ;
-        //this->path = c.path;
+        this->path = c.path;
         return *this;
     }
 };

@@ -6,6 +6,7 @@ CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/
 CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/lib/graph/AdjMatNet.h
 CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/lib/graph/edge.h
 CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/lib/graph/vertex.h
+CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/lib/io/AnsTable.h
 CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/lib/io/basicStruct.h
 CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/lib/io/car.h
 CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/lib/io/carPath.h
@@ -18,4 +19,6 @@ CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/
 CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/lib/vector/vector_copyfrom.h
 CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/lib/vector/vector_im.h
 CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/para.h
+CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/pfs.h
+CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/CodeCraft-2019/tardis.h
 

@@ -7,6 +7,7 @@
 #include "edge.h"
 #include <map>
 #include <stdio.h>
+#include "../DEBUG.h"
 
 #define DEFAULT_INFINITY -1
 #define FEFAULT_SIZE 100
@@ -86,16 +87,43 @@ public:
     bool findPath(int s, int v,std::vector<int> & ans);
     int findPath_t(int s, int v,std::vector<int> & ans);
     int findPath_t(int s, int v);
-    void getPrio(std::vector<int> & prio );
+    void getPrio(std::vector<int> & prio );    
+    //int evalPath_t(Car const & car, std::vector<int> const & path, bool const & RoadidOrNode);
+    std::vector<int> path2node(int const & s, std::vector<int> const & path);
+    std::vector<int> node2path(std::vector<int> const & node);
 };
+
+std::vector<int> AdjMatNet::path2node(int const & s, std::vector<int> const & path)
+{
+    std::vector<int> ans;
+    ans.push_back(s);
+    for(int i = 0, v = s; i < path.size(); i++)
+    {        
+        v = NbrCross(path[i],v);
+        ans.push_back(v);
+    }    
+    return ans;
+}
+
+std::vector<int> AdjMatNet::node2path(std::vector<int> const & node)
+{
+    std::vector<int> ans;
+    for(unsigned int i = 0; i < node.size()-1; i++)
+    {
+        ans.push_back( roadid( node[i], node[i+1] ) );
+    }
+    return ans;
+}
+
 
 /*
     孤立节点
         连通图出现孤立节点的情况 要么是官方路网有错 要么是 当前时间、当前节点周围的边权都是INF
+        INF的判断应该交给机器学习去做 而不是手动遗传特征工程
         出现孤立节点的情况的时候 应该延迟时间出发
     template <typename PU> bool DIJK(Car const & car,TARDIS const & table, PU prioUpdater);
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    （这个地方有问题）
+    （这个地方有bug，语法bug 回调造成类间相互引用 难道还要写设计模式？ 菜的难受 不想当程序员）
 */
 // template <typename PU> void  AdjMatNet::dijk(Car const & car,TARDIS const & table, PU prioUpdater)
 // {
@@ -146,20 +174,10 @@ template <typename PU> void AdjMatNet::pfs(int s , PU prioUpdater)
 void AdjMatNet::getPrio(std::vector<int> & ans)
 {
     ans.resize(num_v);
-
-    // std::cout << "---------------- graph test ----------------"  << std::endl;
-
-
     for(int i = 0; i < num_v; i++)
     {
-        //std::cout << parent(i) << ' ';
-        //ans.push_back(ans);
         ans[i] = priority(i);
-        //std::cout << weight(i) << ' ';
     }
-
-    // std::cout << "---------------- graph test end ----------------"  << std::endl;
-
 }
 bool AdjMatNet::findPath(int s, int v, std::vector<int> & ans)
 {
