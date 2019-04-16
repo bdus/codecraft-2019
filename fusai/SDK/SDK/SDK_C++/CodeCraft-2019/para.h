@@ -1,4 +1,5 @@
 #pragma once
+#include <cassert>
 #include <math.h>
 
 #ifndef MYINF
@@ -19,58 +20,62 @@ inline double fast_exp(double x)
     x *= x;x *= x;x *= x;x *= x;
     return x;
 }
-inline float evalT(int const & length, int const & channel, int const & V_car, int const & V_r, int const & N_car)
-{
-    const float para1 = 0.5;   //时间阻抗系数
-    const int para2 = 1.4;            //时间阻抗指数
-    //const float para3 = 0.5;   //道路的容量限制阈值
-    //const float para4 = 1.5;   //道路的容量限制阈值 para4
+    const float para0 = 0.3;
+    const float para1 = 0.15;   //时间阻抗系数
+    const float para2 = 0.15;   //时间阻抗系数
+    const float para3 = 0.15;   //时间阻抗系数
 
-    //float t0 = (float)length/min(V_car,V_r);
+    const float para4 = 0.01;   //主干道罚项
+
+    const float th1 = 0.2;   //时间阻抗系数
+    const float th2 = 0.5;   //时间阻抗系数
+    const float th3 = 0.8;   //时间阻抗系数
+
+inline float evalT(int const & length, int const & channel, int const & V_car, int const & V_r, int const & N_car, int const & N_car_t)
+{
 
     float base = min(V_car,V_r);
-    float vol = length*channel*para1;
+    float vol = length*channel*para0;
 
     //int vol = length*channel;
-    float rati = (float)N_car/ (float)vol; // + 0.01; 考虑浮点数
+    float rati = (float)N_car/ (float)vol + 0.05; //考虑浮点数
+    float t0 = (float)length/base;
 
     //计算时间阻抗
-    //float R = 1 + para1 * pow(rati/para3,para2); // +
+
     float t  = 0;
-    if(rati< 0.7)
+    if(0.0 < rati && rati< 0.9 && t0 > 0.0 )
     {
-    	t = length / (base - base * rati * para2);
+        float R = 1;
+        if( rati < th1 )
+        {
+            R= 1;
+        }
+        else if( rati < th2)
+        {
+            float R1 = para1 * pow(rati /th1,4);
+            R = 1+ R1;
+        }
+        else if(rati < th3 )
+        {
+            float R1 = para1 * pow(rati /th1,4);
+            float R2 = para2 * pow(rati /th2 ,4);
+            R = 1+ R1 + R2 ;
+        }
+        else
+        {
+            float R1 = para1 * pow(rati /th1,4);
+            float R2 = para2 * pow(rati /th2 ,4);
+            float R3 = para3 * pow(rati /th3,4);
+            R = 1 + R1 + R2 + R3 ;
+        }
+        //std::cout << R << std::endl;
+        if(R > 8)
+            return MYINF;
+    	t = t0*(R);
         return t;
     }
     else
         return MYINF;
     //计算道路可达性
-
-    //道路可达性(如果判断不可达,断路)
-    //if(rati >= para3) //超过一定容量 断路
-    //    return MYINF;
-    //else if(R > para4)//阻抗大于一定值 断路
-    //    return MYINF;
-    //else  //返回时间阻抗
-    //    return t;
-//
-//    int vol = length*channel *a ;
-//    if(N_car>=vol)
-//        return MYINF;
-//    else
-//    {
-//        float rati = (float)N_car/ (float)vol;
-//        float ans = length / min(V_car,V_r) ;
-//        if(ans < 0)
-//            return MYINF;
-//        else if(ans > MYINF)
-//            return MYINF;
-//            if( rati < 0.2 )
-//                return ans;
-//            else if( rati < 0.5)
-//                return ans*2;
-//            else
-//                return ans * fast_exp(5*rati);
-//
-//    }
 }

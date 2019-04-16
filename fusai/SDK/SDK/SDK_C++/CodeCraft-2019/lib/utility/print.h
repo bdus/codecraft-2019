@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-
+#ifdef _MyDSALIST_H_
 void print(std::vector<CarPath> const & pAList)
 {
     for(auto p : pAList)
@@ -15,6 +15,20 @@ void print(std::vector<CarPath> const & pAList)
         std::cout  << " |< " << std::endl;
     }
 }
+#endif // _MyDSALIST_H_
+
+//void print(std::vector<CarPath> const & pAList)
+//{
+//    for(auto p : pAList)
+//    {
+//        std::cout << p.id << "," << p.startTime;
+//        for(auto c: p.path)
+//        {
+//            std::cout  << ", "<< c ;
+//        }
+//        std::cout  << " |< " << std::endl;
+//    }
+//}
 
 template <typename T>
 void print(const std::vector<T> & v)

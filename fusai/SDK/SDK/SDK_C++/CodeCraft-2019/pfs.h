@@ -14,24 +14,35 @@ struct DijkstraPU { //针对BFS算法的顶点优先级更新器
    }
 };
 
-struct TimeDijkPU { //针对BFS算法的顶点优先级更新器
-   virtual void operator() ( AdjMatNet * g, int uk, int v ,Car const & car,TARDIS * tb ) {
-      if ( g->status ( v ) == UNDISCOVERED ) //对于uk每一尚未被发现的邻接顶点v
-      {
+
+inline float CalWeight(int uk, int v, AdjMatNet * g,TARDIS * tb,Car const & car)
+{
+        //
         int Nc = tb->read( g->priority(uk),uk,v);
-        if(Nc == -1)
-            Nc = MYINF;
-        else if(Nc < 0)
-            Nc = MYINF;
-        else if(Nc > MYINF)
-            Nc = MYINF;
+        int Nc1 = tb->read( g->priority(uk) +1 ,uk,v);
+        int Nc2 = tb->read( g->priority(uk) -1 ,uk,v);
+
+        int N_car_t = (int) ( Nc/3+ (Nc+Nc1+Nc2)/6);
+
+        if(Nc < 0 && Nc > MYINF)
+                return MYINF;
+
         float weight = evalT(
             g->length(uk,v) ,
             g->channel(uk,v),
             car.speed,
             g->speed(uk,v),
-            Nc
+            Nc,N_car_t
               );
+        return weight;
+}
+
+
+struct TimeDijkPU { //针对BFS算法的顶点优先级更新器
+   virtual void operator() ( AdjMatNet * g, int uk, int v ,Car const & car,TARDIS * tb ) {
+      if ( g->status ( v ) == UNDISCOVERED ) //对于uk每一尚未被发现的邻接顶点v
+      {
+        float weight =  CalWeight(uk, v, g, tb, car);
         // std::cout << "weight " << weight << "prio" << g->priority ( uk ) << "; ";
         if ( g->priority ( v ) > g->priority ( uk ) + weight ) { //将其到起点的距离作为优先级数
             g->priority ( v ) = g->priority ( uk ) +  weight; //更新优先级（数）
@@ -103,7 +114,7 @@ int evalPath_t(AdjMatNet & g, TARDIS & table, Car const & car, std::vector<int> 
     }
     else
     {
-        LOG( g.roadid( s,  g.NbrCross( path[0], s ) )  == path[0], "is not roadid");        
+        LOG( g.roadid( s,  g.NbrCross( path[0], s ) )  == path[0], "is not roadid");
         //LOG( g.roadid( ed,  g.NbrCross( path[path.size()-1], ed ) )  == path[path.size()-1],"is not roadid");//is roadid  (这里有问题)
 
         int uk = 0;//s;

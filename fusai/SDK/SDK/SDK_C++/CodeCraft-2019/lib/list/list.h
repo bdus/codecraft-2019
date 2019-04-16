@@ -2,6 +2,8 @@
 #pragma once
 #include "listNode.h"
 
+#define _MyDSALIST_H_
+
 namespace MyDSA
 {
     template <typename T>
@@ -11,7 +13,7 @@ namespace MyDSA
         int _size;
         ListNodePosi(T) header;
         ListNodePosi(T) trailer;
-    
+
     protected:
         void init();
         int clear();
@@ -41,9 +43,12 @@ namespace MyDSA
         ListNodePosi(T) push_back(T const & e) { return insertAsLast(e); };
 
         T remove (ListNodePosi(T) p);
-        
+        void sort ( ListNodePosi(T) p, int n ); //列表区间排序
+        void sort() { sort ( first(), _size ); } //列表整体排序
+        void mergeSort ( ListNodePosi(T) & p, int n ) ;
+
     };
-    
+
 }
 
 #include "list_implemention.h"

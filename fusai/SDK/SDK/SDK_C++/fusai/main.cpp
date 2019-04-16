@@ -10,42 +10,17 @@
 #include <algorithm>
 #include "tardis.h"
 #include "lib/io/AnsTable.h"
+#include <iterator>
+#include <list>
+#include "isINF.h"
 
-/* 安排预设车
-				 这时候沿着路径遍历本质上就是评价这条路径
-				 	其意义在于 规划在TARDIS上 在时空上影响后车
-				 		考虑到预设车未必就能按照 其planTime出发
 
-						 首先假设预设车没出发就一直堵在出口
-					 	如果有大量同planTime、OD的预设车的话 其存在 视作为一条持续存在的OD流	（未得到验证）
+/*
 
-				 		再假如阻滞模型能够正确估计时间
-					 	那么就能够正确delay 将这条OD流明白的安排在TARDIS上 （未得到验证）
+                膨胀变形
+                保持理智
 
-					于是现在的问题
-						其实就是评价路径 给一个合适的delay
-
-					那么我们依据什么评价路径
-					 	现在的策略等于是将delay的评价交给了para中还没写出来的分类模型 与回归模型 (作用是估计时间、判断路况 避免死锁)
-						并且加上一个假设：一条路径的时空子路死锁、那么这条路也死锁
-						于是 我们不需要再判断一整段路如何
-							对于能够绕路的 绕路
-								不能绕路的 在时间上调整
-
-					 	那这直觉上不是一个线性的分类
-						 我们要尽量减少模型参数、避免过拟合
-						 由于是在for循环的最里面 c*car*O(n*n)
-						 	c直接影响了模型复杂度 因此要用简单的模型
-
-							模型：非线性、快速、简单、收敛快
-						（特征工程、设计一下loss）
-					感觉也可以转化成弱监督或者含隐变量em的方法
-
-				估计delay
-					delay是在时间上调整的策略 （但是唯一的吗？)
-					delay现在是XJBS的 最多加了 排序策略+指数平滑
-					delay也是一个回归问题[0,n]、不过也可以看作分类[0,n]
-					但目前就排序+ema cpp也太痛苦了吧
+                加了排序
 			 */
 using std::cout;
 using std::endl;
@@ -77,11 +52,18 @@ int main(int argc, char *argv[])
 
 //-----------------------------------------------------
 
+
+
 /* read txt */
-    MyDSA::Vector<Car> carList;
+    //MyDSA::Vector<Car> carList;
+    std::vector<Car> carList;
     textread(carList,carPath,1);
-    carList.sort(); //排序需要调！
+    std::sort(carList.begin(),carList.end());
+    //carList.sort(); //排序需要调！
     //print(carList);
+//    std::list<Car> carList;
+//    std::copy(carVector.begin(),carVector.end(),std::back_inserter(carList));
+
 
     MyDSA::Vector<Cross> vList;
     textread<Cross>(vList,crossPath,1);
@@ -104,7 +86,7 @@ int main(int argc, char *argv[])
     AdjMatNet gd(vList,eList);
     //gd.print();
 
-	TARDIS table(eList, gd);
+	TARDIS table(eList, &gd);
 	//table.print();
 
 	//todo 答案表
@@ -112,36 +94,44 @@ int main(int argc, char *argv[])
 	//anstb.push_back(0,1,std::vector<int> (5,0));
 	//anstb.print(answerPath);
 	AnsTable outAns;
-//	std::vector<int> ndes{0,1,2,3};
-//	print( gd.node2path(ndes) );
-//	std::vector<int> path{501,502,503};
-	//print( gd.path2node(gd.CrossId(1),path) );
 
-	//todo OD矩阵
+	//delay 矩阵
+    std::vector<std::vector<int> > delayMat1 (gd.n_v(), std::vector<int>(gd.n_v() , 0));
+    std::vector<std::vector<int> > delayMat2 (gd.n_v(), std::vector<int>(gd.n_v() , 0));
+    std::vector<std::vector<int> > delayMat3 (gd.n_v(), std::vector<int>(gd.n_v() , 0));
+
+    //  status
+    INFTab staTable(&table);
+    //print(staTable);
+//    std::cout << table.width() << std::endl;
+//    std::cout <<  staTable.isINF(0,1,5) << std::endl;
+//       staTable.INFThis(0,1,5);
+//       staTable.INFThis(0,1,6);
+//       staTable.INFThis(0,1,7);
+//    std::cout <<  staTable.isINF(0,1,5) << std::endl;
+//    std::cout <<  staTable.findSpace(0,1,5) << std::endl;
 
 /* 构建 数据结构 end*/
 
-//-------------------- process begin ---------------------------------
+    int tmp = 0;
     int delay_cnt = 0;
-	//木有排序 先随便high
+	//加了排序
     for(int i = 0, delay = 0, delay_bk = 0; i < carList.size(); i++)
     {
 		Car car = carList[i];
-
-		delay = 0;				 // update delay delay_bk
-		delay_bk = delay;
 		std::vector<int> ans;	 // path buf
-
 		std::vector<int> pathbuf;	 // path buf
 		//bool finded = false;	 // search flag
+		int gfrom = gd.CrossId(car.from) ;
+		int gto = gd.CrossId(car.to) ;
 
 		// ------------- (这里！ 目前还是！int！) ---------
 		int laste = -1;
 
-
-		//delay 策略还是改一下吧 考虑上ml
+		//delay 策略
 		if(true == car.preset)
 		{
+            delay = delayMat1[ gfrom ][ gto ];
 			int realPt;
 			presetAnstb.read(car.id,realPt,pathbuf);
 			if(realPt != car.planTime)
@@ -153,15 +143,63 @@ int main(int argc, char *argv[])
 			do
 			{
 				laste = evalPath_t(gd, table, car,ans,TimeDijkPU(),true,delay);
-				delay+=2; delay_cnt++;
-			}
-			while( laste == -1 );
+				if(laste < 0)
+				{
+                    staTable.INFThis( ans[0], ans[1] , (car.planTime+delay) );
+                    //delay += 3;
+                    delay =  max(delay+3, staTable.findSpace(ans[0],ans[1],car.planTime+delay) ) ;
+                    delay_cnt++;
+				}
+				else
+				{
+                    break;
+				}
+			}while( laste == -1 );
+			delayMat1[ gd.CrossId(car.from) ][ gd.CrossId(car.to) ] = delay;
 
 			outAns.push_back(car.id, car.planTime, pathbuf);
 			//convert roadid (pathbuf) to node (ans)
 		}
+		else if(true == car.priority)
+		{
+            delay = delayMat2[ gd.CrossId(car.from) ][ gd.CrossId(car.to) ];
+            //delay =  max(delay, findSpace(gfrom,gto,car.planTime+delay ,&table,staTable) ) ;
+			do
+			{
+				DIJK(gd,car,table, TimeDijkPU(), delay);
+				laste = gd.findPath_t(gd.CrossId(car.from),gd.CrossId(car.to),ans);
+				reverse(ans.begin(),ans.end());
+
+
+				if(ans.size() < 2)
+				{
+				    laste = -1;
+				    tmp++;
+                }
+
+				//cout << laste << endl;
+				if(laste < 1  )
+				{
+                    tmp--;
+                    assert( tmp == 0);
+                    //print(ans);
+                    //std::cout << gfrom << "," << gto << std::endl;
+					//assert( (gfrom == ans[0]) );
+					//staTable.INFThis(gfrom,ans[1], (car.planTime+delay) );
+					delay += 3;
+					//delay =  max(delay+3, staTable.findSpace(gfrom,ans[1],car.planTime+delay) ) ;
+
+					 delay_cnt++;
+					//cout << "delay ..." << endl;
+					ans.clear();
+				}
+			}while (laste < 1);
+            delayMat2[ gd.CrossId(car.from) ][ gd.CrossId(car.to) ] = delay ;
+		}
 		else
 		{
+            delay = delayMat3[ gd.CrossId(car.from) ][ gd.CrossId(car.to) ];
+            //delay =  max(delay, findSpace(gfrom,gto,car.planTime+delay,&table,staTable) ) ;
 			do
 			{
 				DIJK(gd,car,table, TimeDijkPU(), delay);
@@ -172,15 +210,17 @@ int main(int argc, char *argv[])
 				//cout << laste << endl;
 				if(laste < 1  )
 				{
-					delay+=2; delay_cnt++;
+					delay+=3;
+					//delay =  max(delay, findSpace(gfrom,gto,car.planTime+delay,&table,staTable) ) ;
+					delay_cnt++;
 					//cout << "delay ..." << endl;
+					//INFThis(gfrom,gto, (car.planTime+delay) ,&table,staTable);
 					ans.clear();
 				}
 			}while (laste < 1);
-
+            delayMat3[ gd.CrossId(car.from) ][ gd.CrossId(car.to) ] = delay ;
 			reverse(ans.begin(),ans.end());
 		}
-
 
 		//update
         std::vector<int> prio;
@@ -211,13 +251,25 @@ int main(int argc, char *argv[])
         if(car.preset == false)
           outAns.push_back(car.id, prio[ ans[0] ], PathId);
 
+        #ifndef _ECHOOFF
+		if( i != 0 && i%1000 == 0 )
+			table.print( std::string ("bin/")  + std::to_string(i) + std::string (".txt") );
+        #endif // _ECHOOFF
 	}
-
 
 //---------------------process end  --------------------------------
 
 std::cout << "------------last car : " << table.lastCar() << " total delay " << delay_cnt << std::endl;
+std::cout << "para0 " <<  para0 << ", para1 " << para1
+        << ", para2" << para2
+        << ", para3" << para3
+        << ", para4" << para4
+        << ", th1" << th1
+        << ", th2" << th2
+        << ", th3" << th3
+        << std::endl;
 outAns.print(answerPath);
+
 //table.print();
 	return 0;
 }

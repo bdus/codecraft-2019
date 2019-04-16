@@ -1,0 +1,34 @@
+cmake version 3.5.1
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+-- The C compiler identification is GNU 4.8.4
+-- The CXX compiler identification is GNU 4.8.4
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/build
+cmake return: 0
+Scanning dependencies of target CodeCraft-2019
+[ 50%] Building CXX object CMakeFiles/CodeCraft-2019.dir/CodeCraft-2019.cpp.o
+[100%] Linking CXX executable /home/sans/lcx/hw/fusai/SDK/SDK/SDK_C++/bin/CodeCraft-2019
+[100%] Built target CodeCraft-2019
+make return: 0
+Begin
+carPath is ../2-map-training-1/car.txt
+roadPath is ../2-map-training-1/road.txt
+crossPath is ../2-map-training-1/cross.txt
+presetAnswerPath is ../2-map-training-1/presetAnswer.txt
+answerPath is ../2-map-training-1/answer.txt
+------------last car : 32710 total delay 8994577
+para0 0.1, para1 0.15, para20.15, para30.15, para40.01, th10.2, th20.5, th30.7

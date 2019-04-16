@@ -4,6 +4,7 @@
 #include <string>
 #include <stdio.h>
 
+
 /**
  *  input:
  *      string filename
@@ -94,10 +95,3 @@ void textread(std::vector<T> & anslist, std::string & filename, int headerlines)
         std::cout << "Failed to open file." << std::endl;
     }
 }
-
-// template <typename Tv, typename Te>
-// void SetGraph(MyDSA::Graph<Tv,Te> & g,  MyDSA::Vector<Cross> const & vList, MyDSA::Vector<Road> const & eList)
-// {
-//     g.insert()
-
-// }

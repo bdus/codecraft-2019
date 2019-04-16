@@ -77,15 +77,30 @@ struct Car
         //这里需要调！！！！！！！！！
         return  ( this->from == c.from ) && (this->to == c.to) && (this->speed == c.speed) && (this->planTime == c.planTime) && (this->preset) ;//&& (this->priority);
     }
-    friend bool operator < (Car const & a, Car const & b)
+    bool operator < (Car const & a) const
     {
-        //return (a.speed < b.speed);// ? true: (a.distance < b.distance);
-        //这里需要调！！！！！！！！！
-        return  (a.preset < b.preset)? true : (a.distance/a.speed < b.distance/b.speed)?true : (a.speed < b.speed) ? true: (a.distance < b.distance) ? true : (a.planTime < b.planTime);
-        //return  (a.preset < b.preset)? true : (a.priority < b.priority)? true: (a.distance/a.speed < b.distance/b.speed)?true : (a.speed < b.speed) ? true: (a.distance < b.distance) ? true : (a.planTime < b.planTime);
+        if(   (  (this->preset== false) && (a.preset == true) )  ||  (  (this->preset== true) && (a.preset == false) )  )
+        {
+                if(this->preset)
+                    return true;
+                return false;
+        }
+        else
+        {
+            if(   (  (this->priority == false) && (a.priority == true) )  ||  (  (this->priority== true) && (a.priority == false) )  )
+            {
+                if(this->priority)
+                    return true;
+                return false;
+            }
+            else
+            {
+                return (this->planTime < a.planTime);
+            }
+        }
     }
-    friend bool operator > (Car const & a, Car const & b)
+    bool operator > (Car const & a)
     {
-        return  b < a;
+        return a < (*this);
     }
 };

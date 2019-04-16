@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="../config/car.txt ../config/road.txt ../config/cross.txt ../config/presetAnswer.txt ../config/answer.txt" />
+				<Option parameters="../config/car.txt ../config/road.txt ../config/cross.txt ../config/presetAnswer.txt ../config/answer.txt | more" />
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="lib/io" />
@@ -22,6 +22,7 @@
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="../2-map-training-1/car.txt ../2-map-training-1/road.txt ../2-map-training-1/cross.txt ../2-map-training-1/presetAnswer.txt ../2-map-training-1/answer.txt" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="lib/io" />
@@ -36,6 +37,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="OD.h" />
+		<Unit filename="isINF.h" />
 		<Unit filename="lib/DEBUG.h" />
 		<Unit filename="lib/graph/AdjMatNet.h" />
 		<Unit filename="lib/graph/edge.h" />
